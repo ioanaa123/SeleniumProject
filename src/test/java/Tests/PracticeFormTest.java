@@ -5,16 +5,19 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.FileAssert;
 import org.testng.annotations.Test;
 
-public class WebTableTest {
+import java.io.File;
+
+public class PracticeFormTest {
 
     public WebDriver driver;
 
     @Test
-    public void automationMethod(){
+    public void automationMethod() {
         //open Chrome browser
-        driver=new ChromeDriver();
+        driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
         //driver.manage().window().fullscreen();
@@ -22,21 +25,16 @@ public class WebTableTest {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,400)");
 
-        WebElement elementsField=driver.findElement(By.xpath("//h5[text()='Elements']"));
-        elementsField.click();
+        WebElement formsField=driver.findElement(By.xpath("//h5[text()='Forms']"));
+        formsField.click();
 
-        WebElement webTablesField=driver.findElement(By.xpath("//span[text()='Web Tables']"));
-        webTablesField.click();
-
-        WebElement addField=driver.findElement(By.id("addNewRecordButton"));
-        addField.click();
+        WebElement practiceFormField=driver.findElement(By.xpath("//span[text()='Practice Form']"));
+        practiceFormField.click();
 
         String firstNameValue="Jane";
         String lastNameValue="Doe";
         String emailAddressValue="jane.doe@gmail.com";
-        String ageValue="25";
-        String salaryValue="9500";
-        String departmentValue="Testing";
+        String mobile="0741258963";
 
         WebElement firstNameField=driver.findElement(By.id("firstName"));
         firstNameField.sendKeys(firstNameValue);
@@ -47,18 +45,14 @@ public class WebTableTest {
         WebElement emailAddressField=driver.findElement(By.id("userEmail"));
         emailAddressField.sendKeys(emailAddressValue);
 
-        WebElement ageField=driver.findElement(By.id("age"));
-        ageField.sendKeys(ageValue);
+        WebElement mobileField=driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
+        mobileField.sendKeys(mobile);
 
-        WebElement salaryField=driver.findElement(By.id("salary"));
-        salaryField.sendKeys(salaryValue);
+        WebElement pictureElement=driver.findElement(By.id("uploadPicture"));
+        File file=new File("src/test/resources/img1.png");
+        pictureElement.sendKeys(file.getAbsolutePath());
 
-        WebElement departmentField=driver.findElement(By.id("department"));
-        departmentField.sendKeys(departmentValue);
-
-        WebElement submitBtn=driver.findElement(By.id("submit"));
-        submitBtn.click();
-
-        driver.close();
     }
+
+
 }
