@@ -1,9 +1,6 @@
 package Tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
@@ -43,6 +40,8 @@ public class PracticeFormTest {
         WebElement emailAddressField = driver.findElement(By.id("userEmail"));
         emailAddressField.sendKeys(emailAddressValue);
 
+        js.executeScript("window.scrollBy(0,400)");
+
         WebElement genderMField = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
         WebElement genderFField = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
         WebElement genderOtherField = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
@@ -71,14 +70,30 @@ public class PracticeFormTest {
         File file = new File("src/test/resources/img1.png");
         pictureElement.sendKeys(file.getAbsolutePath());
 
-        js.executeScript("window.scrollBy(0,400)");
+        WebElement subjectElement = driver.findElement(By.id("subjectsInput"));
+        String subjectValue = "Social studies";
+        subjectElement.sendKeys(subjectValue);
+        subjectElement.sendKeys(Keys.ENTER);
 
-        WebElement submitBtn = driver.findElement(By.id("submit"));
-        submitBtn.click();
+        WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
+        js.executeScript("arguments[0].click();", stateElement);
+        stateElement.sendKeys("NCR");
+        stateElement.sendKeys(Keys.ENTER);
+
+        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
+        js.executeScript("arguments[0].click();", cityElement);
+        stateElement.sendKeys("DELHI");
+        cityElement.sendKeys(Keys.ENTER);
+
+
+
+
+        //WebElement submitBtn = driver.findElement(By.id("submit"));
+       // submitBtn.click();
 
         // WebElement closeForm = driver.findElement();
 
-        driver.close();
+       // driver.close();
 
     }
 
