@@ -3,19 +3,19 @@ package Tests;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.HashMap;
+import java.util.List;
 
 public class AlertTest {
 
     public WebDriver driver;
 
     @Test
-    public void alertMethod(){
+    public void alertMethod() {
         driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
@@ -42,7 +42,7 @@ public class AlertTest {
         delayAlertElement.click();
 
         //definim un wait explicit ca sa astepte dupa alerta
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.alertIsPresent());
 
         Alert delayAlert = driver.switchTo().alert();
@@ -55,18 +55,20 @@ public class AlertTest {
         confirmationAlert.dismiss();
 
         WebElement confirmationResultAlertElement = driver.findElement(By.id("confirmResult"));
+        Assert.assertEquals(confirmationResultAlertElement.getText(), "You selected Cancel");
 
-        // verify the selected value
+        WebElement promptAlertElement = driver.findElement(By.id("promtButton"));
+        promptAlertElement.click();
 
-        WebElement promtAlertElement = driver.findElement(By.id("promtButton"));
-        promtAlertElement.click();
-
-        Alert promtAlert =driver.switchTo().alert();
+        Alert promtAlert = driver.switchTo().alert();
         promtAlert.sendKeys("Jane");
         promtAlert.accept();
 
-        // verify the value
+        //Verify entered value
+        WebElement promptResultAlertElement = driver.findElement(By.id("promptResult"));
+        Assert.assertEquals(promptResultAlertElement.getText(), "You entered Jane");
 
+        driver.close();
     }
 
 
