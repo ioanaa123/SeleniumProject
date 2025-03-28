@@ -2,9 +2,12 @@ package Tests;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 public class PracticeFormTest {
 
@@ -71,7 +74,7 @@ public class PracticeFormTest {
         pictureElement.sendKeys(file.getAbsolutePath());
 
         WebElement subjectElement = driver.findElement(By.id("subjectsInput"));
-        String subjectValue = "Social studies";
+        String subjectValue = "Social Studies";
         subjectElement.sendKeys(subjectValue);
         subjectElement.sendKeys(Keys.ENTER);
 
@@ -82,20 +85,35 @@ public class PracticeFormTest {
 
         WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
         js.executeScript("arguments[0].click();", cityElement);
-        stateElement.sendKeys("DELHI");
+        cityElement.sendKeys("Delhi");
         cityElement.sendKeys(Keys.ENTER);
 
+        WebElement submitBtn = driver.findElement(By.id("submit"));
+        js.executeScript("arguments[0].click();", submitBtn);
 
 
+        HashMap<String, String> validateForm = new HashMap<>();
+        validateForm.put("Student Name", firstNameValue + " " + lastNameValue);
+        validateForm.put("Student Email", emailAddressValue);
+        validateForm.put("Gender", genderValue);
+        validateForm.put("Mobile", mobile);
+        validateForm.put("Date of Birth", "26 March,2025");
+        validateForm.put("Subjects", subjectValue);
+        validateForm.put("Hobbies", "");
+        validateForm.put("Picture", file.getName());
+        validateForm.put("Address", "");
+        validateForm.put("State and City", "NCR Delhi");
 
-        //WebElement submitBtn = driver.findElement(By.id("submit"));
-       // submitBtn.click();
+        List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
+        for (WebElement rowElement : actualFormTable) {
+            List<WebElement> columns = rowElement.findElements(By.xpath("td"));
+            String label = columns.get(0).getText();
+            String values = columns.get(1).getText();
 
-        // WebElement closeForm = driver.findElement();
+            Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
 
-       // driver.close();
+            //driver.close();
 
+        }
     }
-
-
 }
