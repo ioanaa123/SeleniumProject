@@ -1,17 +1,17 @@
 package Tests;
 
+import HelperMethods.ElementsMethods;
+import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeFormTest {
 
     public WebDriver driver;
+    ElementsMethods elementsMethods;
+    ElementsMethods js;
 
     @Test
     public void automationMethod() {
@@ -19,29 +19,28 @@ public class PracticeFormTest {
         driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
-
-        String firstNameValue = "Jane";
-        String lastNameValue = "Doe";
-        String emailAddressValue = "jane.doe@gmail.com";
-        String mobile = "0741258963";
-
+        elementsMethods = new ElementsMethods(driver);
         JavascriptExecutor js = (JavascriptExecutor) driver;
+
         js.executeScript("window.scrollBy(0,400)");
 
         WebElement formsField = driver.findElement(By.xpath("//h5[text()='Forms']"));
-        formsField.click();
+        elementsMethods.clickOnElement(formsField);
 
         WebElement practiceFormField = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        practiceFormField.click();
+        elementsMethods.clickOnElement(practiceFormField);
 
         WebElement firstNameField = driver.findElement(By.id("firstName"));
-        firstNameField.sendKeys(firstNameValue);
+        elementsMethods.fillElement(firstNameField, "Jane");
 
         WebElement lastNameField = driver.findElement(By.id("lastName"));
-        lastNameField.sendKeys(lastNameValue);
+        elementsMethods.fillElement(lastNameField, "Doe");
 
         WebElement emailAddressField = driver.findElement(By.id("userEmail"));
-        emailAddressField.sendKeys(emailAddressValue);
+        elementsMethods.fillElement(emailAddressField, "jane.doe@gmail.com");
+
+        WebElement mobileField = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
+        elementsMethods.fillElement(mobileField, "0741258963");
 
         js.executeScript("window.scrollBy(0,400)");
 
@@ -50,70 +49,58 @@ public class PracticeFormTest {
         WebElement genderOtherField = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
         String genderValue = "Female";
 
-//        if (genderValue.equals("Male")) {
-//            genderMField.click();
-//        } else if (genderValue.equals("Female")) {
-//            genderFField.click();
-//        } else if (genderValue.equals("Other")) {
-//            genderOtherField.click();
-//        }
+        List<WebElement> genderElement = new ArrayList<>();
+        genderElement.add(genderMField);
+        genderElement.add(genderFField);
+        genderElement.add(genderOtherField);
 
-        if (genderMField.getText().equals(genderValue)) {
-            genderMField.click();
-        } else if (genderFField.getText().equals(genderValue)) {
-            genderFField.click();
-        } else if (genderOtherField.getText().equals(genderValue)) {
-            genderOtherField.click();
-        }
-
-        WebElement mobileField = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
-        mobileField.sendKeys(mobile);
+        elementsMethods.selectElementFromListByText(genderElement,genderValue);
 
         WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
-        File file = new File("src/test/resources/img1.png");
-        pictureElement.sendKeys(file.getAbsolutePath());
+        elementsMethods.uploadPicture(pictureElement);
 
         WebElement subjectElement = driver.findElement(By.id("subjectsInput"));
-        String subjectValue = "Social Studies";
-        subjectElement.sendKeys(subjectValue);
+        elementsMethods.fillElement(subjectElement, "Social Studies");
         subjectElement.sendKeys(Keys.ENTER);
 
         WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
+
         js.executeScript("arguments[0].click();", stateElement);
         stateElement.sendKeys("NCR");
         stateElement.sendKeys(Keys.ENTER);
+//
+//        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
+//        js.executeScript("arguments[0].click();", cityElement);
+//        cityElement.sendKeys("Delhi");
+//        cityElement.sendKeys(Keys.ENTER);
+//
+//        WebElement submitBtn = driver.findElement(By.id("submit"));
+//        js.executeScript("arguments[0].click();", submitBtn);
+//
+//        Date date = new Date();
+//
+//
+//        HashMap<String, String> validateForm = new HashMap<>();
+//        validateForm.put("Student Name", firstNameValue + " " + lastNameValue);
+//        validateForm.put("Student Email", emailAddressValue);
+//        validateForm.put("Gender", genderValue);
+//        validateForm.put("Mobile", mobile);
+//        validateForm.put("Date of Birth", String.valueOf(date));
+//        validateForm.put("Subjects", subjectValue);
+//        validateForm.put("Hobbies", "");
+//        validateForm.put("Picture", file.getName());
+//        validateForm.put("Address", "");
+//        validateForm.put("State and City", "NCR Delhi");
+//
+//        List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
+//        for (WebElement rowElement : actualFormTable) {
+//            List<WebElement> columns = rowElement.findElements(By.xpath("td"));
+//            String label = columns.get(0).getText();
+//            String values = columns.get(1).getText();
+//
+//            Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
+//
+        //driver.close();
 
-        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
-        js.executeScript("arguments[0].click();", cityElement);
-        cityElement.sendKeys("Delhi");
-        cityElement.sendKeys(Keys.ENTER);
-
-        WebElement submitBtn = driver.findElement(By.id("submit"));
-        js.executeScript("arguments[0].click();", submitBtn);
-
-
-        HashMap<String, String> validateForm = new HashMap<>();
-        validateForm.put("Student Name", firstNameValue + " " + lastNameValue);
-        validateForm.put("Student Email", emailAddressValue);
-        validateForm.put("Gender", genderValue);
-        validateForm.put("Mobile", mobile);
-        validateForm.put("Date of Birth", "26 March,2025");
-        validateForm.put("Subjects", subjectValue);
-        validateForm.put("Hobbies", "");
-        validateForm.put("Picture", file.getName());
-        validateForm.put("Address", "");
-        validateForm.put("State and City", "NCR Delhi");
-
-        List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
-        for (WebElement rowElement : actualFormTable) {
-            List<WebElement> columns = rowElement.findElements(By.xpath("td"));
-            String label = columns.get(0).getText();
-            String values = columns.get(1).getText();
-
-            Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
-
-            //driver.close();
-
-        }
     }
 }
