@@ -1,50 +1,55 @@
 package Tests;
 
+import HelperMethods.ElementsMethods;
+import HelperMethods.JavaScriptMethods;
+import HelperMethods.WindowsMethods;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BrowserWindowsTest {
 
     public WebDriver driver;
+    ElementsMethods elementsMethods;
+    JavaScriptMethods javaScriptMethods;
+    WindowsMethods windowsMethods;
 
     @Test
     public void browserWindowMethod() {
         driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
+        elementsMethods = new ElementsMethods(driver);
+        windowsMethods = new WindowsMethods(driver);
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,500)");
+        javaScriptMethods = new JavaScriptMethods(driver);
+        javaScriptMethods.scrollDown(500);
 
         WebElement alertElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        alertElement.click();
+        elementsMethods.clickOnElement(alertElement);
 
         WebElement browserWindowElement = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        browserWindowElement.click();
+        elementsMethods.clickOnElement(browserWindowElement);
 
         WebElement newTabElement = driver.findElement(By.id("tabButton"));
-        newTabElement.click();
+        elementsMethods.clickOnElement(newTabElement);
 
-        List<String> tabList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabList.get(1));
+        windowsMethods.switchToOpenTab();
 
         WebElement newTabSampleElement = driver.findElement(By.id("sampleHeading"));
         System.out.println("Textul din noul tab este: " + newTabSampleElement.getText());
 
         driver.close();
-        driver.switchTo().window(tabList.get(0));
-        //driver.switchTo().window(tabList.getFirst());
+        windowsMethods.switchToMainTab();
+       //driver.switchTo().window(tabList.getFirst());
 
         WebElement newWindowElement = driver.findElement(By.id("windowButton"));
-        newWindowElement.click();
+        windowsMethods.switchToOpenWindow();
 
         List<String> windowList = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(windowList.get(1));
