@@ -8,9 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import pages.CommonPage;
+import pages.HomePage;
 
 public class BrowserWindowsTest {
 
@@ -18,6 +17,8 @@ public class BrowserWindowsTest {
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
     WindowsMethods windowsMethods;
+    HomePage homePage;
+    CommonPage commonPage;
 
     @Test
     public void browserWindowMethod() {
@@ -26,15 +27,14 @@ public class BrowserWindowsTest {
         driver.manage().window().maximize();
         elementsMethods = new ElementsMethods(driver);
         windowsMethods = new WindowsMethods(driver);
-
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
         javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scrollDown(500);
 
-        WebElement alertElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementsMethods.clickOnElement(alertElement);
+        homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
-        WebElement browserWindowElement = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        elementsMethods.clickOnElement(browserWindowElement);
+        commonPage.goToDesiredSubMenu("Browser Windows");
 
         WebElement newTabElement = driver.findElement(By.id("tabButton"));
         elementsMethods.clickOnElement(newTabElement);
@@ -46,31 +46,29 @@ public class BrowserWindowsTest {
 
         driver.close();
         windowsMethods.switchToMainTab();
-       //driver.switchTo().window(tabList.getFirst());
 
         WebElement newWindowElement = driver.findElement(By.id("windowButton"));
+        elementsMethods.clickOnElement(newWindowElement);
         windowsMethods.switchToOpenWindow();
 
-        List<String> windowList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(windowList.get(1));
-
         WebElement newWindowSampleElement = driver.findElement(By.id("sampleHeading"));
-        System.out.println("Textul din noul tab este: " + newWindowSampleElement.getText());
+        System.out.println("Textul din noul window este: " + newWindowSampleElement.getText());
 
         driver.close();
-        driver.switchTo().window(windowList.get(0));
+        windowsMethods.switchToMainTab();
+        javaScriptMethods.scrollDown(500);
 
         WebElement newWindowMsgElement = driver.findElement(By.id("messageWindowButton"));
-        newWindowMsgElement.click();
+        elementsMethods.clickOnElement(newWindowMsgElement);
 
-        List<String> newWindowMsgList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(newWindowMsgList.get(1));
+        windowsMethods.switchToMainWindow();
 
-//        WebElement newWindowMsgSampleElement = driver.findElement(By.id("sampleHeading"));
-//        System.out.println("Textul din noul tab este: " + newWindowMsgSampleElement.getText());
+
+        WebElement newWindowMsgSampleElement = driver.findElement(By.id("sampleHeading"));
+        System.out.println("Textul din noul tab este: " + newWindowMsgSampleElement.getText());
 
         driver.close();
-        driver.switchTo().window(newWindowMsgList.get(0));
+        windowsMethods.switchToMainTab();
 
     }
 }

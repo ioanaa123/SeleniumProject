@@ -1,7 +1,6 @@
 package HelperMethods;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +8,12 @@ import java.util.List;
 public class WindowsMethods {
     WebDriver driver;
 
-    List<String> tabList = new ArrayList<>(driver.getWindowHandles());
-
     public WindowsMethods(WebDriver driver) {
         this.driver = driver;
     }
 
     public void switchToOpenTab(){
+        List<String> tabList = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabList.get(1));
     }
 
@@ -27,9 +25,12 @@ public class WindowsMethods {
         switchToOpenTab();
     }
 
+    public void switchToMainWindow(){
+        switchToMain();
+    }
     public void switchToMain(){
+        List<String> tabList = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabList.get(0));
     }
-
 
 }

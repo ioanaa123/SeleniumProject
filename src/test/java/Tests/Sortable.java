@@ -6,20 +6,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
+import pages.CommonPage;
+import pages.HomePage;
 
-import javax.swing.*;
 import java.util.List;
 
 public class Sortable {
 
     WebDriver driver;
+    HomePage homePage;
+    CommonPage commonPage;
+
     @Test
     public void parcurgereLista(){
         driver = new ChromeDriver();
-        driver.get("https://demoqa.com/sortable");
+        driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
 
         Actions action = new Actions(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
+
+        homePage.goToDesiredMenu("Interactions");
+
+        commonPage.goToDesiredSubMenu("Sortable");
 
         List<WebElement> list = driver.findElements(By.xpath("//div[@id='demo-tabpane-list']//div[@class='list-group-item list-group-item-action']"));
 

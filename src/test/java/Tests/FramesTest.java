@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.CommonPage;
+import pages.HomePage;
 
 
 public class FramesTest {
@@ -15,6 +17,8 @@ public class FramesTest {
     ElementsMethods elementsMethods;
     FramesMethods framesMethods;
     JavaScriptMethods javaScriptMethods;
+    HomePage homePage;
+    CommonPage commonPage;
 
     @Test
     public void framesMethod() {
@@ -24,15 +28,15 @@ public class FramesTest {
 
         elementsMethods = new ElementsMethods(driver);
         framesMethods = new FramesMethods(driver);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
 
         javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scroll(0, 400);
 
-        WebElement alertElement = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementsMethods.clickOnElement(alertElement);
+        homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
-        WebElement framesElement = driver.findElement(By.xpath("//span[text()='Frames']"));
-        elementsMethods.clickOnElement(framesElement);
+        commonPage.goToDesiredSubMenu("Frames");
 
         WebElement firstFrameElement = driver.findElement(By.id("frame1"));
         framesMethods.switchToFrame(firstFrameElement);

@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import pages.CommonPage;
+import pages.HomePage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,9 +18,11 @@ public class PracticeFormTest {
     public WebDriver driver;
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
+    HomePage homePage;
+    CommonPage commonPage;
 
     @Test
-    public void automationMethod() {
+    public void automationMethod() throws InterruptedException {
         //open Chrome browser
         driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
@@ -26,12 +30,12 @@ public class PracticeFormTest {
         elementsMethods = new ElementsMethods(driver);
         javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scrollDown(400);
+        homePage = new HomePage(driver);
+        commonPage = new CommonPage(driver);
 
-        WebElement formsField = driver.findElement(By.xpath("//h5[text()='Forms']"));
-        elementsMethods.clickOnElement(formsField);
+        homePage.goToDesiredMenu("Forms");
 
-        WebElement practiceFormField = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        elementsMethods.clickOnElement(practiceFormField);
+        commonPage.goToDesiredSubMenu("Practice Form");
 
         WebElement firstNameField = driver.findElement(By.id("firstName"));
         elementsMethods.fillElement(firstNameField, "Jane");
@@ -69,10 +73,10 @@ public class PracticeFormTest {
 
         WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
         javaScriptMethods.forceClick(stateElement);
-        javaScriptMethods.fillElementEnterAndForceClick(stateElement,"NCR" );
+        javaScriptMethods.fillElementEnterAndForceClick(stateElement, "NCR");
 
         WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
-        javaScriptMethods.fillElementEnterAndForceClick(cityElement,"Delhi" );
+        javaScriptMethods.fillElementEnterAndForceClick(cityElement, "Delhi");
 
         WebElement submitBtn = driver.findElement(By.id("submit"));
         javaScriptMethods.forceClick(submitBtn);
@@ -82,7 +86,7 @@ public class PracticeFormTest {
         validateForm.put("Student Email", "jane.doe@gmail.com");
         validateForm.put("Gender", genderValue);
         validateForm.put("Mobile", "0741258963");
-        validateForm.put("Date of Birth","24 April,2025");
+        validateForm.put("Date of Birth", "24 April,2025");
         validateForm.put("Subjects", "Social Studies");
         validateForm.put("Hobbies", "");
         validateForm.put("Picture", "img1.png");
@@ -97,7 +101,8 @@ public class PracticeFormTest {
 
             Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
 
-            //driver.close();
+            Thread.sleep(1000);
+            driver.close();
 
         }
     }
