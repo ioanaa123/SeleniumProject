@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import pages.CommonPage;
 import pages.HomePage;
+import pages.PracticeFormPage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class PracticeFormTest {
     JavaScriptMethods javaScriptMethods;
     HomePage homePage;
     CommonPage commonPage;
+    PracticeFormPage practiceFormPage;
 
     @Test
     public void automationMethod() throws InterruptedException {
@@ -32,44 +34,29 @@ public class PracticeFormTest {
         javaScriptMethods.scrollDown(400);
         homePage = new HomePage(driver);
         commonPage = new CommonPage(driver);
+        practiceFormPage = new PracticeFormPage(driver);
 
         homePage.goToDesiredMenu("Forms");
 
         commonPage.goToDesiredSubMenu("Practice Form");
 
-        WebElement firstNameField = driver.findElement(By.id("firstName"));
-        elementsMethods.fillElement(firstNameField, "Jane");
-
-        WebElement lastNameField = driver.findElement(By.id("lastName"));
-        elementsMethods.fillElement(lastNameField, "Doe");
-
-        WebElement emailAddressField = driver.findElement(By.id("userEmail"));
-        elementsMethods.fillElement(emailAddressField, "jane.doe@gmail.com");
-
-        WebElement mobileField = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
-        elementsMethods.fillElement(mobileField, "0741258963");
+        practiceFormPage.completeFirstRegion("Jane", "Doe","jane.doe@gmail.com", "Oxford Str nr10", "0741258963");
 
         javaScriptMethods.scrollDown(400);
 
-        WebElement genderMField = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
-        WebElement genderFField = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
-        WebElement genderOtherField = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
-        String genderValue = "Female";
-
-        List<WebElement> genderElement = new ArrayList<>();
-        genderElement.add(genderMField);
-        genderElement.add(genderFField);
-        genderElement.add(genderOtherField);
-
-        elementsMethods.selectElementFromListByText(genderElement, genderValue);
-
+        practiceFormPage.selectGender("Female");
         WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
         elementsMethods.uploadPicture(pictureElement);
 
-        WebElement subjectElement = driver.findElement(By.id("subjectsInput"));
-        elementsMethods.fillElementAndEnter(subjectElement, "Social Studies");
+        List<String> subject = new ArrayList<>();
+        subject.add("Maths");
+        subject.add("English");
+        practiceFormPage.completeSubjectWithList(subject);
+        List<String> hobbies = new ArrayList<>();
+        subject.add("Sports");
+        subject.add("Reading");
+        practiceFormPage.completeHobbies(hobbies);
 
-        javaScriptMethods.scrollDown(400);
 
         WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
         javaScriptMethods.forceClick(stateElement);
@@ -84,13 +71,13 @@ public class PracticeFormTest {
         HashMap<String, String> validateForm = new HashMap<>();
         validateForm.put("Student Name", "Jane Doe");
         validateForm.put("Student Email", "jane.doe@gmail.com");
-        validateForm.put("Gender", genderValue);
+        validateForm.put("Gender", "Female");
         validateForm.put("Mobile", "0741258963");
-        validateForm.put("Date of Birth", "24 April,2025");
-        validateForm.put("Subjects", "Social Studies");
+        validateForm.put("Date of Birth", "28 April,2025");
+        validateForm.put("Subjects", "Maths, English");
         validateForm.put("Hobbies", "");
         validateForm.put("Picture", "img1.png");
-        validateForm.put("Address", "");
+        validateForm.put("Address", "Oxford Str nr10");
         validateForm.put("State and City", "NCR Delhi");
 
         List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
@@ -102,7 +89,7 @@ public class PracticeFormTest {
             Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
 
             Thread.sleep(1000);
-            driver.close();
+           // driver.close();
 
         }
     }

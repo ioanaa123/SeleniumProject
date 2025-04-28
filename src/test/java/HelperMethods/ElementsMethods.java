@@ -3,15 +3,21 @@ package HelperMethods;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 
 public class ElementsMethods {
     WebDriver driver;
+    Actions actions;
 
     public ElementsMethods(WebDriver driver) {
         this.driver = driver;
+        this.actions = new Actions(driver);
     }
 
     public void clickOnElement(WebElement element) {
@@ -47,4 +53,35 @@ public class ElementsMethods {
             }
         }
     }
+
+    public void fillWithAction(WebElement element, String value){
+        actions.sendKeys(value).perform();
+        waitVisibilityOfElement(element);
+        actions.sendKeys(Keys.ENTER);
+    }
+
+    public void waitVisibilityOfElement(WebElement element) {
+        // definim un wait explicit ca sa astepte dupa vizibilitatea elementului
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void fillMultipleValues(WebElement element, List<String> values) {
+        for (String value : values) {
+            element.sendKeys(value);
+            element.sendKeys(Keys.ENTER);
+        }
+    }
+
+    public void clickMultipleValues(List<WebElement> element, List<String> values){
+        for (String value : values) {
+            for (WebElement webElement: element){
+                if (webElement.getText().equals(value)) {
+                    webElement.click();
+                }
+            }
+        }
+    }
+
+
 }
