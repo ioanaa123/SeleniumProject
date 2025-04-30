@@ -56,7 +56,6 @@ public class PracticeFormPage {
     WebElement pictureElement;
     @FindBy(id = "react-select-3-input")
     WebElement stateElement;
-
     @FindBy(id = "react-select-4-input")
     WebElement cityElement;
 
@@ -99,5 +98,6 @@ public class PracticeFormPage {
         hobbiesElement.add(readingHobbyElement);
         elementsMethods.clickMultipleValues(hobbiesElement, hobbies);
     }
+
 
  }

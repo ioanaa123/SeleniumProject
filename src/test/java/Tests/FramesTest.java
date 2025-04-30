@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import pages.CommonPage;
+import pages.FramesPage;
 import pages.HomePage;
 
 
@@ -19,6 +20,7 @@ public class FramesTest {
     JavaScriptMethods javaScriptMethods;
     HomePage homePage;
     CommonPage commonPage;
+    FramesPage framesPage;
 
     @Test
     public void framesMethod() {
@@ -30,6 +32,7 @@ public class FramesTest {
         framesMethods = new FramesMethods(driver);
         homePage = new HomePage(driver);
         commonPage = new CommonPage(driver);
+        framesPage= new FramesPage(driver);
 
         javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scroll(0, 400);
@@ -37,23 +40,8 @@ public class FramesTest {
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
         commonPage.goToDesiredSubMenu("Frames");
-
-        WebElement firstFrameElement = driver.findElement(By.id("frame1"));
-        framesMethods.switchToFrame(firstFrameElement);
-
-        WebElement firstFrameTextElement = driver.findElement(By.id("sampleHeading"));
-        elementsMethods.displayElementContent(firstFrameTextElement);
-
-        framesMethods.switchToDefault();
-
-        WebElement secondFrameElement = driver.findElement(By.id("frame2"));
-        framesMethods.switchToFrame(secondFrameElement);
-
-        javaScriptMethods.scroll(200, 200);
-
-        WebElement secondFrameTextElement = driver.findElement(By.id("sampleHeading"));
-        elementsMethods.displayElementContent(secondFrameTextElement);
-        framesMethods.switchToDefault();
+        framesPage.interactWithFrame1();
+        framesPage.interactWithFrame2();
 
         driver.close();
     }

@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.HomePage;
+import pages.WebTablesPage;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class WebTableTest {
     WindowsMethods windowsMethods;
     HomePage homePage;
     CommonPage commonPage;
+    WebTablesPage webTablesPage;
 
     @Test
     public void automationMethod() {
@@ -33,8 +35,18 @@ public class WebTableTest {
         windowsMethods = new WindowsMethods(driver);
         homePage = new HomePage(driver);
         commonPage = new CommonPage(driver);
+        webTablesPage = new WebTablesPage(driver);
         javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scrollDown(500);
+
+
+        homePage.goToDesiredMenu("Elements");
+
+        commonPage.goToDesiredSubMenu("Web Tables");
+
+        int initialTableSize = webTablesPage.getCurrentTableSize();
+
+        webTablesPage.addNewRecord();
 
         String firstNameValue = "Jane";
         String lastNameValue = "Doe";
@@ -42,16 +54,6 @@ public class WebTableTest {
         String ageValue = "25";
         String salaryValue = "9500";
         String departmentValue = "Testing";
-
-        homePage.goToDesiredMenu("Elements");
-
-        commonPage.goToDesiredSubMenu("Web Tables");
-
-        List<WebElement> tableElements = driver.findElements(By.xpath("//div[@class='rt-tbody']/div/div[@class='rt-tr -even' or @class='rt-tr -odd']"));
-        Integer actualTableSize = tableElements.size();
-
-        WebElement addField = driver.findElement(By.id("addNewRecordButton"));
-        elementsMethods.clickOnElement(addField);
 
         WebElement firstNameField = driver.findElement(By.id("firstName"));
         elementsMethods.fillElement(firstNameField, firstNameValue);
@@ -76,11 +78,12 @@ public class WebTableTest {
 
         List<WebElement> expectedTableElements = driver.findElements(By.xpath("//div[@class='rt-tbody']/div/div[@class='rt-tr -even' or @class='rt-tr -odd']"));
 
-        Integer expectedTableSize = actualTableSize +1;
+        Integer expectedTableSize = initialTableSize +1;
 
         Assert.assertEquals(expectedTableElements.size(),expectedTableSize);
 
         String actualTableValue = expectedTableElements.get(3).getText();
+        javaScriptMethods.scrollDown(500);
 
         Assert.assertTrue(actualTableValue.contains(firstNameValue));
         Assert.assertTrue(actualTableValue.contains(lastNameValue));
@@ -89,6 +92,6 @@ public class WebTableTest {
         Assert.assertTrue(actualTableValue.contains(salaryValue));
         Assert.assertTrue(actualTableValue.contains(departmentValue));
 
-        driver.close();
+        //driver.close();
     }
 }

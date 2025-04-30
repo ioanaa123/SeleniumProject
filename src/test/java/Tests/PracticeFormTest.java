@@ -52,9 +52,11 @@ public class PracticeFormTest {
         subject.add("Maths");
         subject.add("English");
         practiceFormPage.completeSubjectWithList(subject);
+
         List<String> hobbies = new ArrayList<>();
         subject.add("Sports");
         subject.add("Reading");
+        subject.add("Music");
         practiceFormPage.completeHobbies(hobbies);
 
 

@@ -19,6 +19,11 @@ public class AlertMethods {
         firstAlert.accept();
     }
 
+    public void interactWithAlertCancel() {
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
+    }
+
     //definim un wait explicit ca sa astepte dupa alerta
     public void explicitAlertWait() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -36,9 +41,15 @@ public class AlertMethods {
         confirmationAlert.dismiss();
     }
 
-    public void interactWithPromtAlert(String value){
-        Alert promtAlert = driver.switchTo().alert();
-        promtAlert.sendKeys(value);
-        promtAlert.accept();
+    public void interactWithPromptAlertAndConfirm(String text) {
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys(text);
+        alert.accept();
+    }
+
+    public void interactWithPromptAlertAndCancel(String text) {
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys(text);
+        alert.dismiss();
     }
 }
