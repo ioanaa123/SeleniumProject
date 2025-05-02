@@ -1,10 +1,8 @@
 package pages;
 
-import HelperMethods.ElementsMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -21,17 +19,17 @@ public class WebTablesPage extends CommonPage{
     @FindBy(id = "firstName")
     private WebElement firstNameElement;
     @FindBy(id = "lastName")
-    WebElement lastNameElement;
+    private WebElement lastNameElement;
     @FindBy(id = "userEmail")
-    WebElement emailElement;
+    private WebElement emailElement;
     @FindBy(id = "age")
-    WebElement ageElement;
+    private WebElement ageElement;
     @FindBy(id = "salary")
-    WebElement salaryElement;
+    private WebElement salaryElement;
     @FindBy(id = "department")
-    WebElement departmentElement;
+    private WebElement departmentElement;
     @FindBy(id = "submit")
-    WebElement submitButton;
+    private WebElement submitButton;
 
     public void addNewRecord() {
         elementsMethods.clickOnElement(addNewRecordButtonElement);

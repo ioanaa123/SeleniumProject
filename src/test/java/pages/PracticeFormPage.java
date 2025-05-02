@@ -10,28 +10,28 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PracticeFormPage extends CommonPage{
+public class PracticeFormPage extends CommonPage {
 
     public PracticeFormPage(WebDriver driver) {
         super(driver);
     }
 
     @FindBy(id = "firstName")
-    WebElement firstNameElement;
+    private WebElement firstNameElement;
     @FindBy(id = "lastName")
-    WebElement lastNameElement;
+    private WebElement lastNameElement;
     @FindBy(id = "userEmail")
-    WebElement userEmailElement;
+    private WebElement userEmailElement;
     @FindBy(css = "input[placeholder='Mobile Number']")
-    WebElement mobileNumber;
+    private WebElement mobileNumber;
     @FindBy(xpath = "//label[@for='gender-radio-1']")
-    WebElement maleGenderElement;
+    private WebElement maleGenderElement;
     @FindBy(xpath = "//label[@for='gender-radio-2']")
-    WebElement femaleGenderElement;
+    private WebElement femaleGenderElement;
     @FindBy(xpath = "//label[@for='gender-radio-3']")
-    WebElement otherGenderElement;
+    private WebElement otherGenderElement;
     @FindBy(id = "currentAddress")
-    WebElement addressElement;
+    private WebElement addressElement;
     @FindBy(xpath = "//label[@for='hobbies-checkbox-1'] ")
     private WebElement sportHobbyElement;
     @FindBy(xpath = "//label[@for='hobbies-checkbox-2'] ")
@@ -49,11 +49,11 @@ public class PracticeFormPage extends CommonPage{
     private WebElement monthOfBirthElement;
 
     @FindBy(id = "uploadPicture")
-    WebElement pictureElement;
+    private WebElement pictureElement;
     @FindBy(id = "react-select-3-input")
-    WebElement stateElement;
+    private WebElement stateElement;
     @FindBy(id = "react-select-4-input")
-    WebElement cityElement;
+    private WebElement cityElement;
 
     public void completeFirstRegion(String firstName, String lastName, String email, String address, String mobileNo) {
         elementsMethods.fillElement(firstNameElement, firstName);
@@ -77,23 +77,24 @@ public class PracticeFormPage extends CommonPage{
         }
     }
 
-    public void completeSubject(String subject){
+    public void completeSubject(String subject) {
         elementsMethods.clickOnElement(subjectsElement);
         elementsMethods.fillWithAction(subjectsElement, subject);
     }
 
-    public void completeSubjectWithList(List<String> list){
+    public void completeSubjectWithList(List<String> list) {
         elementsMethods.clickOnElement(subjectsElement);
         elementsMethods.fillMultipleValues(subjectsElement, list);
     }
 
-    public void completeHobbies(List<String> hobbies){
+    public void completeHobbies(List<String> hobbies) {
         List<WebElement> hobbiesElement = new ArrayList<>();
         hobbiesElement.add(sportHobbyElement);
         hobbiesElement.add(musicHobbyElement);
         hobbiesElement.add(readingHobbyElement);
         elementsMethods.clickMultipleValues(hobbiesElement, hobbies);
+        javaScriptMethods.scrollDown(400);
     }
 
 
- }
+}

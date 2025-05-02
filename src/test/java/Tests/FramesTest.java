@@ -12,8 +12,7 @@ import pages.HomePage;
 
 
 public class FramesTest extends ShareData {
-    ElementsMethods elementsMethods;
-    FramesMethods framesMethods;
+
     JavaScriptMethods javaScriptMethods;
     HomePage homePage;
     CommonPage commonPage;
@@ -22,13 +21,10 @@ public class FramesTest extends ShareData {
     @Test
     public void framesMethod() {
 
-        elementsMethods = new ElementsMethods(driver);
-        framesMethods = new FramesMethods(driver);
-        homePage = new HomePage(driver);
-        commonPage = new CommonPage(driver);
-        framesPage= new FramesPage(driver);
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
+        framesPage= new FramesPage(getDriver());
 
-        javaScriptMethods = new JavaScriptMethods(driver);
         javaScriptMethods.scroll(0, 400);
 
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
@@ -37,6 +33,5 @@ public class FramesTest extends ShareData {
         framesPage.interactWithFrame1();
         framesPage.interactWithFrame2();
 
-        driver.close();
     }
 }

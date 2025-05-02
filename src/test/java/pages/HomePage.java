@@ -14,7 +14,7 @@ public class HomePage extends CommonPage{
 
     // identificam WebElementele specifice pentru pagina
     @FindBy(xpath = "//h5")
-    List<WebElement> elements;
+    private List<WebElement> elements;
 
     // facem metode specifice
 

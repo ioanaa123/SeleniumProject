@@ -28,7 +28,7 @@ public class CommonPage {
 
     // identificam WebElementele specifice pentru sub- pagini
     @FindBy(xpath = "//span[@class='text']")
-    List<WebElement> elements;
+    private List<WebElement> elements;
 
     // facem metode specifice
 

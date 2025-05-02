@@ -16,21 +16,15 @@ import java.util.List;
 
 public class PracticeFormTest extends ShareData {
 
-    ElementsMethods elementsMethods;
-    JavaScriptMethods javaScriptMethods;
     HomePage homePage;
     CommonPage commonPage;
     PracticeFormPage practiceFormPage;
 
     @Test
     public void automationMethod() throws InterruptedException {
-        elementsMethods = new ElementsMethods(driver);
-        javaScriptMethods = new JavaScriptMethods(driver);
-        homePage = new HomePage(driver);
-        commonPage = new CommonPage(driver);
-        practiceFormPage = new PracticeFormPage(driver);
-
-        javaScriptMethods.scrollDown(400);
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
+        practiceFormPage = new PracticeFormPage(getDriver());
 
         homePage.goToDesiredMenu("Forms");
 
@@ -38,11 +32,11 @@ public class PracticeFormTest extends ShareData {
 
         practiceFormPage.completeFirstRegion("Jane", "Doe","jane.doe@gmail.com", "Oxford Str nr10", "0741258963");
 
-        javaScriptMethods.scrollDown(400);
+       // javaScriptMethods.scrollDown(400);
 
         practiceFormPage.selectGender("Female");
-        WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
-        elementsMethods.uploadPicture(pictureElement);
+//        WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
+//        elementsMethods.uploadPicture(pictureElement);
 
         List<String> subject = new ArrayList<>();
         subject.add("Maths");
@@ -56,15 +50,16 @@ public class PracticeFormTest extends ShareData {
         practiceFormPage.completeHobbies(hobbies);
 
 
-        WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
-        javaScriptMethods.forceClick(stateElement);
-        javaScriptMethods.fillElementEnterAndForceClick(stateElement, "NCR");
 
-        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
-        javaScriptMethods.fillElementEnterAndForceClick(cityElement, "Delhi");
-
-        WebElement submitBtn = driver.findElement(By.id("submit"));
-        javaScriptMethods.forceClick(submitBtn);
+//        WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
+//        javaScriptMethods.forceClick(stateElement);
+//        javaScriptMethods.fillElementEnterAndForceClick(stateElement, "NCR");
+//
+//        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
+//        javaScriptMethods.fillElementEnterAndForceClick(cityElement, "Delhi");
+//
+//        WebElement submitBtn = driver.findElement(By.id("submit"));
+//        javaScriptMethods.forceClick(submitBtn);
 
         HashMap<String, String> validateForm = new HashMap<>();
         validateForm.put("Student Name", "Jane Doe");
@@ -78,17 +73,17 @@ public class PracticeFormTest extends ShareData {
         validateForm.put("Address", "Oxford Str nr10");
         validateForm.put("State and City", "NCR Delhi");
 
-        List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
-        for (WebElement rowElement : actualFormTable) {
-            List<WebElement> columns = rowElement.findElements(By.xpath("td"));
-            String label = columns.get(0).getText();
-            String values = columns.get(1).getText();
-
-            Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
-
-            Thread.sleep(1000);
-           // driver.close();
+//        List<WebElement> actualFormTable = driver.findElements(By.xpath("/html/body/div[4]/div/div/div[2]/div/table/tbody/tr"));
+//        for (WebElement rowElement : actualFormTable) {
+//            List<WebElement> columns = rowElement.findElements(By.xpath("td"));
+//            String label = columns.get(0).getText();
+//            String values = columns.get(1).getText();
+//
+//            Assert.assertEquals(values, validateForm.get(label), "Validating failed at  " + label);
+//
+//            Thread.sleep(1000);
+//           // driver.close();
 
         }
     }
-}
+

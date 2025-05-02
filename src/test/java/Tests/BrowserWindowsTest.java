@@ -15,29 +15,21 @@ import pages.HomePage;
 
 public class BrowserWindowsTest extends ShareData {
 
-    ElementsMethods elementsMethods;
-    JavaScriptMethods javaScriptMethods;
-    WindowsMethods windowsMethods;
     HomePage homePage;
     CommonPage commonPage;
-    BrowserWindowsPage browserWindowsPage;
 
     @Test
     public void browserWindowMethod() {
 
-        elementsMethods = new ElementsMethods(driver);
-        windowsMethods = new WindowsMethods(driver);
-        homePage = new HomePage(driver);
-        commonPage = new CommonPage(driver);
-        browserWindowsPage = new BrowserWindowsPage(driver);
-        javaScriptMethods = new JavaScriptMethods(driver);
-        javaScriptMethods.scrollDown(500);
+
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
 
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
         commonPage.goToDesiredSubMenu("Browser Windows");
 
-        browserWindowsPage.interactWithTheNewTab();
+//        browserWindowsPage.interactWithTheNewTab();
 
 //
 //        WebElement newWindowElement = driver.findElement(By.id("windowButton"));

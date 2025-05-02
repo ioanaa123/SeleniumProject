@@ -20,7 +20,6 @@ public class BrowserWindowsPage extends CommonPage{
     @FindBy(id = "sampleHeading")
     private WebElement sampleHeadingFromNewWindowElement;
 
-
     public void interactWithTheNewTab() {
         // New Tab:
         elementsMethods.clickOnElement(newTabButtonElement);

@@ -26,11 +26,11 @@ public class AlertTest extends ShareData {
     @Test
     public void alertMethod() {
 
-        javaScriptMethods = new JavaScriptMethods(driver);
-        alertMethods = new AlertMethods(driver);
-        homePage = new HomePage(driver);
-        commonPage = new CommonPage(driver);
-        alertsPage = new AlertsPage(driver);
+        javaScriptMethods = new JavaScriptMethods(getDriver());
+        alertMethods = new AlertMethods(getDriver());
+        homePage = new HomePage(getDriver());
+        commonPage = new CommonPage(getDriver());
+        alertsPage = new AlertsPage(getDriver());
 
         javaScriptMethods.scrollDown(400);
 
