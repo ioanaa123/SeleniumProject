@@ -2,24 +2,13 @@ package pages;
 
 import HelperMethods.AlertMethods;
 import HelperMethods.ElementsMethods;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class AlertsPage {
-    WebDriver driver;
-    ElementsMethods elementsMethods;
-    AlertMethods alertMethods;
-
-    public AlertsPage(WebDriver driver) {
-        this.driver = driver;
-        this.elementsMethods = new ElementsMethods(driver);
-        this.alertMethods = new AlertMethods(driver);
-        PageFactory.initElements(driver, this);
-    }
+public class AlertsPage extends CommonPage{
 
     @FindBy(id = "alertButton")
     private WebElement alertOkButtonElement;
@@ -33,6 +22,10 @@ public class AlertsPage {
     private WebElement confirmResult;
     @FindBy(id = "promptResult")
     private WebElement promptResult;
+
+    public AlertsPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void interactWithSimpleAlert() {
         elementsMethods.clickOnElement(alertOkButtonElement);

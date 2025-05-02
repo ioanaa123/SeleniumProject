@@ -8,14 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class WebTablesPage {
-    WebDriver driver;
-    ElementsMethods elementsMethods;
+public class WebTablesPage extends CommonPage{
 
     public WebTablesPage(WebDriver driver) {
-        this.driver = driver;
-        this.elementsMethods = new ElementsMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(xpath = "//div[@class='rt-tbody']/div/div[@class='rt-tr -even' or @class='rt-tr -odd']")

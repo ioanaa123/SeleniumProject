@@ -2,9 +2,9 @@ package Tests;
 
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavaScriptMethods;
+import ShareData.ShareData;
 import org.junit.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import pages.CommonPage;
 import pages.HomePage;
@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PracticeFormTest {
+public class PracticeFormTest extends ShareData {
 
-    public WebDriver driver;
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
     HomePage homePage;
@@ -25,16 +24,13 @@ public class PracticeFormTest {
 
     @Test
     public void automationMethod() throws InterruptedException {
-        //open Chrome browser
-        driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
         elementsMethods = new ElementsMethods(driver);
         javaScriptMethods = new JavaScriptMethods(driver);
-        javaScriptMethods.scrollDown(400);
         homePage = new HomePage(driver);
         commonPage = new CommonPage(driver);
         practiceFormPage = new PracticeFormPage(driver);
+
+        javaScriptMethods.scrollDown(400);
 
         homePage.goToDesiredMenu("Forms");
 

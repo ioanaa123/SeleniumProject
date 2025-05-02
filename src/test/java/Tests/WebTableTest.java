@@ -3,6 +3,7 @@ package Tests;
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavaScriptMethods;
 import HelperMethods.WindowsMethods;
+import ShareData.ShareData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,8 @@ import pages.WebTablesPage;
 
 import java.util.List;
 
-public class WebTableTest {
+public class WebTableTest extends ShareData {
 
-    public WebDriver driver;
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
     WindowsMethods windowsMethods;
@@ -27,10 +27,7 @@ public class WebTableTest {
 
     @Test
     public void automationMethod() {
-        //open Chrome browser
-        driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
+
         elementsMethods = new ElementsMethods(driver);
         windowsMethods = new WindowsMethods(driver);
         homePage = new HomePage(driver);

@@ -3,6 +3,7 @@ package Tests;
 import HelperMethods.AlertMethods;
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavaScriptMethods;
+import ShareData.ShareData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -13,9 +14,8 @@ import pages.HomePage;
 
 import java.time.Duration;
 
-public class AlertTest {
+public class AlertTest extends ShareData {
 
-    public WebDriver driver;
     ElementsMethods elementsMethods;
     AlertMethods alertMethods;
     JavaScriptMethods javaScriptMethods;
@@ -25,9 +25,6 @@ public class AlertTest {
 
     @Test
     public void alertMethod() {
-        driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
 
         javaScriptMethods = new JavaScriptMethods(driver);
         alertMethods = new AlertMethods(driver);
@@ -35,11 +32,7 @@ public class AlertTest {
         commonPage = new CommonPage(driver);
         alertsPage = new AlertsPage(driver);
 
-        // Definim un wait implicit pentru un interval maxim de timp
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         javaScriptMethods.scrollDown(400);
-
 
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
@@ -52,6 +45,5 @@ public class AlertTest {
         alertsPage.verifyConfirmResult("You selected Cancel");
         alertsPage.interactWithPromptAlert("Jane", true);
         alertsPage.verifyPromptResult("You entered Jane");
-        driver.close();
     }
 }

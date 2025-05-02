@@ -1,24 +1,14 @@
 package pages;
 
-import HelperMethods.AlertMethods;
-import HelperMethods.ElementsMethods;
-import HelperMethods.WindowsMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class BrowserWindowsPage {
-    WebDriver driver;
-    ElementsMethods elementsMethods;
-    WindowsMethods windowsMethods;
+public class BrowserWindowsPage extends CommonPage{
 
     public BrowserWindowsPage(WebDriver driver) {
-        this.driver = driver;
-        this.elementsMethods = new ElementsMethods(driver);
-        this.windowsMethods = new WindowsMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(id = "tabButton")
@@ -29,6 +19,7 @@ public class BrowserWindowsPage {
     private WebElement newWindowButtonElement;
     @FindBy(id = "sampleHeading")
     private WebElement sampleHeadingFromNewWindowElement;
+
 
     public void interactWithTheNewTab() {
         // New Tab:

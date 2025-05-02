@@ -1,7 +1,6 @@
 package pages;
 
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavaScriptMethods;
+import HelperMethods.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,11 +12,17 @@ public class CommonPage {
     WebDriver driver;
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
+    AlertMethods alertMethods;
+    WindowsMethods windowsMethods;
+    FramesMethods framesMethods;
 
     public CommonPage(WebDriver driver) {
         this.driver = driver;
         this.elementsMethods = new ElementsMethods(driver);
         this.javaScriptMethods = new JavaScriptMethods(driver);
+        this.alertMethods = new AlertMethods(driver);
+        this.windowsMethods = new WindowsMethods(driver);
+        this.framesMethods = new FramesMethods(driver);
         PageFactory.initElements(driver,this);
     }
 

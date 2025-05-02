@@ -3,18 +3,15 @@ package Tests;
 import HelperMethods.ElementsMethods;
 import HelperMethods.FramesMethods;
 import HelperMethods.JavaScriptMethods;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import ShareData.ShareData;
+
 import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.FramesPage;
 import pages.HomePage;
 
 
-public class FramesTest {
-    public WebDriver driver;
+public class FramesTest extends ShareData {
     ElementsMethods elementsMethods;
     FramesMethods framesMethods;
     JavaScriptMethods javaScriptMethods;
@@ -24,9 +21,6 @@ public class FramesTest {
 
     @Test
     public void framesMethod() {
-        driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
 
         elementsMethods = new ElementsMethods(driver);
         framesMethods = new FramesMethods(driver);

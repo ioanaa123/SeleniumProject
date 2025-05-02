@@ -3,6 +3,7 @@ package Tests;
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavaScriptMethods;
 import HelperMethods.WindowsMethods;
+import ShareData.ShareData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +13,8 @@ import pages.BrowserWindowsPage;
 import pages.CommonPage;
 import pages.HomePage;
 
-public class BrowserWindowsTest {
+public class BrowserWindowsTest extends ShareData {
 
-    public WebDriver driver;
     ElementsMethods elementsMethods;
     JavaScriptMethods javaScriptMethods;
     WindowsMethods windowsMethods;
@@ -24,9 +24,7 @@ public class BrowserWindowsTest {
 
     @Test
     public void browserWindowMethod() {
-        driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
+
         elementsMethods = new ElementsMethods(driver);
         windowsMethods = new WindowsMethods(driver);
         homePage = new HomePage(driver);
