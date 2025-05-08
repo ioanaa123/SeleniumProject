@@ -9,12 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CommonPage {
-    WebDriver driver;
-    ElementsMethods elementsMethods;
-    JavaScriptMethods javaScriptMethods;
-    AlertMethods alertMethods;
-    WindowsMethods windowsMethods;
-    FramesMethods framesMethods;
+    protected WebDriver driver;
+    protected ElementsMethods elementsMethods;
+    protected JavaScriptMethods javaScriptMethods;
+    protected AlertMethods alertMethods;
+    protected WindowsMethods windowsMethods;
+    protected FramesMethods framesMethods;
 
     public CommonPage(WebDriver driver) {
         this.driver = driver;
@@ -36,6 +36,4 @@ public class CommonPage {
         javaScriptMethods.scrollDown(400);
         elementsMethods.selectElementFromListByText(elements, SubMenu);
     }
-
-
 }

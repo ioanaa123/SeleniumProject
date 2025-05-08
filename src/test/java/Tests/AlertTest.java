@@ -16,9 +16,6 @@ import java.time.Duration;
 
 public class AlertTest extends ShareData {
 
-    ElementsMethods elementsMethods;
-    AlertMethods alertMethods;
-    JavaScriptMethods javaScriptMethods;
     HomePage homePage;
     CommonPage commonPage;
     AlertsPage alertsPage;
@@ -26,19 +23,14 @@ public class AlertTest extends ShareData {
     @Test
     public void alertMethod() {
 
-        javaScriptMethods = new JavaScriptMethods(getDriver());
-        alertMethods = new AlertMethods(getDriver());
         homePage = new HomePage(getDriver());
         commonPage = new CommonPage(getDriver());
         alertsPage = new AlertsPage(getDriver());
-
-        javaScriptMethods.scrollDown(400);
 
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
 
         commonPage.goToDesiredSubMenu("Alerts");
         alertsPage.interactWithSimpleAlert();
-        javaScriptMethods.scrollDown(300);
 
         alertsPage.interactWithDelayedAlert();
         alertsPage.interactWithConfirmAlert(false);

@@ -27,6 +27,16 @@ public class BrowserWindowsPage extends CommonPage{
         Assert.assertEquals(sampleHeadingFromNewTabElement.getText(), "This is a sample page");
         driver.close();
         windowsMethods.switchToMainWindow();
+        javaScriptMethods.scrollDown(400);
+    }
+
+
+    public void interactWithTheNewWindow() {
+        // New Window:
+        elementsMethods.clickOnElement(newWindowButtonElement);
+        windowsMethods.switchToOpenWindow();
+        Assert.assertEquals(sampleHeadingFromNewWindowElement.getText(), "This is a sample page");
+        windowsMethods.switchToMainWindow();
     }
 
 }

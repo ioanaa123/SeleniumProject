@@ -27,6 +27,7 @@ public class AlertsPage extends CommonPage{
     public void interactWithSimpleAlert() {
         elementsMethods.clickOnElement(alertOkButtonElement);
         alertMethods.interactWithAlertOk();
+        javaScriptMethods.scrollDown(400);
     }
 
     public void interactWithDelayedAlert() {

@@ -2,6 +2,7 @@ package pages;
 
 import HelperMethods.ElementsMethods;
 import HelperMethods.JavaScriptMethods;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,6 +55,8 @@ public class PracticeFormPage extends CommonPage {
     private WebElement stateElement;
     @FindBy(id = "react-select-4-input")
     private WebElement cityElement;
+    @FindBy(id = "submit")
+    private WebElement submitElement;
 
     public void completeFirstRegion(String firstName, String lastName, String email, String address, String mobileNo) {
         elementsMethods.fillElement(firstNameElement, firstName);
@@ -96,5 +99,30 @@ public class PracticeFormPage extends CommonPage {
         javaScriptMethods.scrollDown(400);
     }
 
+    public void uploadPicture() {
+        elementsMethods.uploadPicture(pictureElement);
+    }
+
+    public void completeStateAndCity(String state, String city) {
+        javaScriptMethods.forceClick(stateElement);
+        elementsMethods.fillElementAndEnter(stateElement, state);
+
+        javaScriptMethods.forceClick(cityElement);
+        elementsMethods.fillElementAndEnter(cityElement, city);
+    }
+
+    public void completeDateOfBirth(int year, int month, int day) {
+        elementsMethods.clickOnElement(dateOfBirthElement);
+        elementsMethods.selectByValue(yearOfBirthElement, String.valueOf(year));
+        elementsMethods.selectByValue(monthOfBirthElement, String.valueOf(month - 1));
+        javaScriptMethods.scrollDown(400);
+        String dayOfBirthXPath = "//div[@class='react-datepicker__day react-datepicker__day--0" + day + "']";
+        WebElement dayOfBirthElement = driver.findElement(By.xpath(dayOfBirthXPath));
+        elementsMethods.clickOnElement(dayOfBirthElement);
+    }
+
+    public void submitForm() {
+        javaScriptMethods.forceClick(submitElement);
+    }
 
 }

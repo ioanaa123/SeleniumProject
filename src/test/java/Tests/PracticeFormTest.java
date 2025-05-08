@@ -1,11 +1,8 @@
 package Tests;
 
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavaScriptMethods;
+
 import ShareData.ShareData;
 import org.junit.Test;
-import org.openqa.selenium.*;
-import org.testng.Assert;
 import pages.CommonPage;
 import pages.HomePage;
 import pages.PracticeFormPage;
@@ -16,9 +13,9 @@ import java.util.List;
 
 public class PracticeFormTest extends ShareData {
 
-    HomePage homePage;
-    CommonPage commonPage;
-    PracticeFormPage practiceFormPage;
+    private HomePage homePage;
+    private CommonPage commonPage;
+    private PracticeFormPage practiceFormPage;
 
     @Test
     public void automationMethod() throws InterruptedException {
@@ -32,11 +29,9 @@ public class PracticeFormTest extends ShareData {
 
         practiceFormPage.completeFirstRegion("Jane", "Doe","jane.doe@gmail.com", "Oxford Str nr10", "0741258963");
 
-       // javaScriptMethods.scrollDown(400);
-
         practiceFormPage.selectGender("Female");
-//        WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
-//        elementsMethods.uploadPicture(pictureElement);
+        practiceFormPage.completeDateOfBirth(1990, 10, 02);
+
 
         List<String> subject = new ArrayList<>();
         subject.add("Maths");
@@ -48,7 +43,8 @@ public class PracticeFormTest extends ShareData {
         subject.add("Reading");
         subject.add("Music");
         practiceFormPage.completeHobbies(hobbies);
-
+        practiceFormPage.uploadPicture();
+        practiceFormPage.submitForm();
 
 
 //        WebElement stateElement = driver.findElement(By.id("react-select-3-input"));

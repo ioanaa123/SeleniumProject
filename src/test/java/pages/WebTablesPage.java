@@ -39,4 +39,24 @@ public class WebTablesPage extends CommonPage{
         return tableElements.size();
     }
 
+    public String getRowContentAsString(int rowIndex) {
+        return tableElements.get(rowIndex).getText();
+    }
+
+    public void completeForm(String firstName, String lastName, String email, String age,
+                             String salary, String department){
+        elementsMethods.fillElement(firstNameElement, firstName);
+        elementsMethods.fillElement(lastNameElement, lastName);
+        elementsMethods.fillElement(emailElement, email);
+        elementsMethods.fillElement(ageElement, age);
+        elementsMethods.fillElement(salaryElement, salary);
+        elementsMethods.fillElement(departmentElement, department);
+    }
+
+    public void  submitForm() {
+        elementsMethods.clickOnElement(submitButton);
+    }
+
+
+
 }

@@ -1,7 +1,5 @@
 package Tests;
 
-import HelperMethods.ElementsMethods;
-import HelperMethods.FramesMethods;
 import HelperMethods.JavaScriptMethods;
 import ShareData.ShareData;
 
@@ -25,13 +23,10 @@ public class FramesTest extends ShareData {
         commonPage = new CommonPage(getDriver());
         framesPage= new FramesPage(getDriver());
 
-        javaScriptMethods.scroll(0, 400);
-
         homePage.goToDesiredMenu("Alerts, Frame & Windows");
-
         commonPage.goToDesiredSubMenu("Frames");
+
         framesPage.interactWithFrame1();
         framesPage.interactWithFrame2();
-
     }
 }
