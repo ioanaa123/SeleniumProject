@@ -36,7 +36,7 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>CostumSuite</id>
+            <id>CustomSuite</id>
             <build>
                 <plugins>
                     <plugin>
