@@ -7,7 +7,6 @@
     <groupId>org.example</groupId>
     <artifactId>SeleniumProject</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
@@ -35,4 +34,40 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>CostumSuite</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.3</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <suiteXmlFile>${suiteXmlFile}.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <build>
+        <pluginManagement>
+           <plugins>
+               <plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-surefire-plugin</artifactId>
+                   <version>3.5.3</version>
+                   <configuration>
+                       <suiteXmlFiles>
+                           <suiteXmlFile>testng.xml</suiteXmlFile>
+                       </suiteXmlFiles>
+                   </configuration>
+               </plugin>
+           </plugins>
+        </pluginManagement>
+    </build>
 </project>
