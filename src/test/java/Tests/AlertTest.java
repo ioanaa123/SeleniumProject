@@ -1,18 +1,10 @@
 package Tests;
 
-import HelperMethods.AlertMethods;
-import HelperMethods.ElementsMethods;
-import HelperMethods.JavaScriptMethods;
 import ShareData.ShareData;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AlertsPage;
 import pages.CommonPage;
 import pages.HomePage;
-
-import java.time.Duration;
 
 public class AlertTest extends ShareData {
 
