@@ -46,17 +46,6 @@ public class PracticeFormTest extends ShareData {
         practiceFormPage.uploadPicture();
         practiceFormPage.submitForm();
 
-
-//        WebElement stateElement = driver.findElement(By.id("react-select-3-input"));
-//        javaScriptMethods.forceClick(stateElement);
-//        javaScriptMethods.fillElementEnterAndForceClick(stateElement, "NCR");
-//
-//        WebElement cityElement = driver.findElement(By.id("react-select-4-input"));
-//        javaScriptMethods.fillElementEnterAndForceClick(cityElement, "Delhi");
-//
-//        WebElement submitBtn = driver.findElement(By.id("submit"));
-//        javaScriptMethods.forceClick(submitBtn);
-
         HashMap<String, String> validateForm = new HashMap<>();
         validateForm.put("Student Name", "Jane Doe");
         validateForm.put("Student Email", "jane.doe@gmail.com");

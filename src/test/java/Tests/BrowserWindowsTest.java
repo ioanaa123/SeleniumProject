@@ -25,20 +25,8 @@ public class BrowserWindowsTest extends ShareData {
         commonPage.goToDesiredSubMenu("Browser Windows");
 
         browserWindowsPage.interactWithTheNewTab();
+        browserWindowsPage.interactWithTheNewWindow();
 
-
-
-//        WebElement newWindowMsgElement = driver.findElement(By.id("messageWindowButton"));
-//        elementsMethods.clickOnElement(newWindowMsgElement);
-//
-//        windowsMethods.switchToMainWindow();
-//
-//
-//        WebElement newWindowMsgSampleElement = driver.findElement(By.id("sampleHeading"));
-//        System.out.println("Textul din noul tab este: " + newWindowMsgSampleElement.getText());
-//
-//        driver.close();
-//        windowsMethods.switchToMainTab();
 
     }
 }
